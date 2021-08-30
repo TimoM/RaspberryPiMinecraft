@@ -1,11 +1,12 @@
 #!/bin/bash
 # Original Minecraft Server Installation Script - James A. Chambers - https://www.jamesachambers.com.
 # Changes and simplifications by Marc Tönsing
-# V1.16.5 20.01.21
-# GitHub Repository: https://github.com/mtoensing/RaspberryPiMinecraft
+# Update to 1.17.1 by Timo M
+# V1.17.1 30.08.21
+# GitHub Repository: https://github.com/timom/RaspberryPiMinecraft
 
 echo "Minecraft Server installation script by James Chambers and Marc Tönsing - V1.0"
-echo "Latest version always at https://github.com/mtoensing/RaspberryPiMinecraft"
+echo "Latest version always at https://github.com/timom/RaspberryPiMinecraft"
 
 if [ -d "minecraft" ]; then
   echo "Directory minecraft already exists!  Exiting... "
@@ -26,7 +27,7 @@ mkdir minecraft
 cd minecraft
 
 echo "Getting latest Paper Minecraft server..."
-wget -O paperclip.jar https://papermc.io/api/v1/paper/1.16.5/latest/download
+wget -O paperclip.jar https://papermc.io/api/v1/paper/1.17.1/latest/download
 
 echo "Building the Minecraft server... "
 java -jar -Xms800M -Xmx800M paperclip.jar
@@ -35,18 +36,18 @@ echo "Accepting the EULA... "
 echo eula=true > eula.txt
 
 echo "Grabbing start.sh from repository... "
-wget -O start.sh https://raw.githubusercontent.com/mtoensing/RaspberryPiMinecraft/master/start.sh
+wget -O start.sh https://raw.githubusercontent.com/timom/RaspberryPiMinecraft/master/start.sh
 chmod +x start.sh
 
 echo "Oh wait. Checking for total memory available..."
 TotalMemory=$(awk '/MemTotal/ { printf "%.0f\n", $2/1024 }' /proc/meminfo)
 if [ $TotalMemory -lt 3000 ]; then
   echo "Sorry, have to grab low spec start.sh from repository... "
-  wget -O start.sh https://raw.githubusercontent.com/mtoensing/RaspberryPiMinecraft/master/start_lowspec.sh
+  wget -O start.sh https://raw.githubusercontent.com/timom/RaspberryPiMinecraft/master/start_lowspec.sh
 fi
 
 echo "Grabbing restart.sh from repository... "
-wget -O restart.sh https://raw.githubusercontent.com/mtoensing/RaspberryPiMinecraft/master/restart.sh
+wget -O restart.sh https://raw.githubusercontent.com/timom/RaspberryPiMinecraft/master/restart.sh
 chmod +x restart.sh
 
 echo "Enter a name for your server "
